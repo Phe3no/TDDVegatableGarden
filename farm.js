@@ -14,7 +14,8 @@ const calculateWithEnvironmentFactors = (plantFactor, eFactor, yieldResult) => {
 
 const getYieldForPlant = (plantHarvest, eFactor) => {
   //JavaScript is a loosely typed language, so you don’t have to specify what type of information will be stored in a variable in advance
-  //when no arguments are passed to the parameter 'factor', the value will be undefined.
+  //when no arguments are passed to the parameter 'eFactor', the value will be undefined.
+  //in that case no calculations have to be made, so return standard yield
   if (eFactor === undefined) return plantHarvest.yield;
 
   let yieldResult = plantHarvest.yield;
@@ -34,7 +35,7 @@ const getYieldForPlant = (plantHarvest, eFactor) => {
       yieldResult
     );
   }
-  //more factors could be added, probably it needs a new helperfunction
+  //more factors could be added, probably that needs (a) new helperfunction(s)
 
   return yieldResult;
 };

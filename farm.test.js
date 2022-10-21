@@ -8,6 +8,7 @@ const {
   getTotalProfit,
 } = require("./farm");
 
+//get yield for plant
 describe("getYieldForPlant", () => {
   const corn = {
     name: "corn",
@@ -42,8 +43,16 @@ describe("getYieldForPlant with environment settings", () => {
     };
     expect(getYieldForPlant(corn, environmentFactors)).toBe(21.6);
   });
+  test("Get yield for plant with sun medium and wind low", () => {
+    const environmentFactors = {
+      sun: "medium",
+      wind: "low",
+    };
+    expect(getYieldForPlant(corn, environmentFactors)).toBe(34.5);
+  });
 });
 
+//get yield for crop
 describe("getYieldForCrop", () => {
   test("Get yield for crop, simple", () => {
     const corn = {
@@ -57,7 +66,7 @@ describe("getYieldForCrop", () => {
     expect(getYieldForCrop(input)).toBe(30);
   });
 });
-
+//get total yield
 describe("getTotalYield", () => {
   test("Calculate total yield with multiple crops", () => {
     const corn = {
@@ -85,6 +94,7 @@ describe("getTotalYield", () => {
   });
 });
 
+//get costs for crop
 describe("getCostsForCrop", () => {
   const corn = {
     name: "corn",
@@ -103,6 +113,7 @@ describe("getCostsForCrop", () => {
   });
 });
 
+// get revenue for crop
 describe("getRevenueForCrop", () => {
   const strawberry = {
     name: "strawberry",
@@ -121,6 +132,7 @@ describe("getRevenueForCrop", () => {
   });
 });
 
+//get profit for crop
 describe("getProfitForCrop", () => {
   const blueberry = {
     name: "blueberry",
@@ -142,6 +154,7 @@ describe("getProfitForCrop", () => {
   });
 });
 
+//get total profit
 describe("getTotalProfit", () => {
   const apple = {
     name: "apple",
