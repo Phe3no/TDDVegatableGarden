@@ -1,3 +1,4 @@
+const { default: test } = require("node:test");
 const {
   getYieldForPlant,
   getYieldForCrop,
@@ -66,6 +67,38 @@ describe("getYieldForCrop", () => {
     expect(getYieldForCrop(input)).toBe(30);
   });
 });
+
+describe("getYieldForCrop with environment factors", () => {
+  const corn = {
+    name: "corn",
+    yield: 30,
+    factor: {
+      sun: {
+        low: -20,
+        medium: 0,
+        high: 30,
+      },
+      wind: {
+        low: 15,
+        medium: 0,
+        high: -10,
+      },
+    },
+  };
+  test("Get yield for multiple crops with sun medium and wind low and 5 plants", () => {
+    const environmentFactors = {
+      sun: "medium",
+      wind: "low",
+    };
+    const input = {
+      crop: corn,
+      numCrops: 5,
+      eFactor: environmentFactors,
+    };
+    expect(getYieldForCrop(input)).toBe(172.5);
+  });
+});
+
 //get total yield
 describe("getTotalYield", () => {
   test("Calculate total yield with multiple crops", () => {
