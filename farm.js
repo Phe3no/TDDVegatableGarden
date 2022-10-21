@@ -41,7 +41,8 @@ const getYieldForPlant = (plantHarvest, eFactor) => {
 };
 
 const getYieldForCrop = (cropHarvest) =>
-  cropHarvest.crop.yield * cropHarvest.numCrops;
+  getYieldForPlant(cropHarvest.crop, cropHarvest.eFactor) *
+  cropHarvest.numCrops;
 
 const getTotalYield = ({ crops }) =>
   crops.reduce(
