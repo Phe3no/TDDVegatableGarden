@@ -7,4 +7,6 @@ An assignment where we calculate the following, among other things:
 - profit for crop
 - total profit
 
-With and without environment factors
+With and without environment factors.
+
+In the vegetable garden I only used fruits, corn and once (nuts isn't it?)
