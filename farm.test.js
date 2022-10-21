@@ -129,11 +129,32 @@ describe("getTotalProfit", () => {
     cost: 20,
     salePrice: 3.5,
   };
-  test("", () => {
+  const walnut = {
+    name: "walnut",
+    yield: 5,
+    cost: 28,
+    salePrice: 9,
+  };
+  test("get total profit of 3 crops of apple and 5 crops of pear", () => {
     const crops = [
       { crop: apple, numCrops: 3 },
       { crop: pear, numCrops: 5 },
     ];
     expect(getTotalProfit({ crops })).toBe(305);
+  });
+  test("get total profit of 3 crops of apple and 0 crops of pear", () => {
+    const crops = [
+      { crop: apple, numCrops: 3 },
+      { crop: pear, numCrops: 0 },
+    ];
+    expect(getTotalProfit({ crops })).toBe(90);
+  });
+  test("get total profit of 2 crops of apple, 3 crops of pear and 1 crop of walnut", () => {
+    const crops = [
+      { crop: apple, numCrops: 2 },
+      { crop: pear, numCrops: 3 },
+      { crop: walnut, numCrops: 1 },
+    ];
+    expect(getTotalProfit({ crops })).toBe(206);
   });
 });
