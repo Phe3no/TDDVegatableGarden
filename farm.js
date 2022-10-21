@@ -37,7 +37,7 @@ const getYieldForPlant = (plantHarvest, eFactor) => {
   }
   //more factors could be added, probably that needs (a) new helperfunction(s)
 
-  return yieldResult;
+  return Math.round(yieldResult * 100) / 100;
 };
 
 const getYieldForCrop = (cropHarvest) =>
