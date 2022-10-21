@@ -1,4 +1,3 @@
-const { default: test } = require("node:test");
 const {
   getYieldForPlant,
   getYieldForCrop,

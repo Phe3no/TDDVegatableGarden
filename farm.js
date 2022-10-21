@@ -18,7 +18,12 @@ const getRevenueForCrop = (crops) =>
 const getProfitForCrop = (crops) =>
   getRevenueForCrop(crops) - getCostsForCrop(crops);
 
-const getTotalProfit = () => {};
+const getTotalProfit = ({ crops }) =>
+  crops.reduce(
+    (previousValue, currentValue) =>
+      previousValue + getProfitForCrop(currentValue),
+    0
+  );
 
 module.exports = {
   getYieldForPlant,
