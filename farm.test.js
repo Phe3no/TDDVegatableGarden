@@ -101,12 +101,16 @@ describe("getProfitForCrop", () => {
     cost: 8,
     salePrice: 11,
   };
-  test("Get revenue for a number of blueberry-crops", () => {
+  test("Get profit for a number of blueberry-crops", () => {
     const crop = { crop: blueberry, numCrops: 3 };
     expect(getProfitForCrop(crop)).toBe(75);
   });
-  test("Get revenue for 0 blueberry-crops", () => {
+  test("Get profit for 0 blueberry-crops", () => {
     const crop = { crop: blueberry, numCrops: 0 };
     expect(getProfitForCrop(crop)).toBe(0);
+  });
+  test("Get profit for 1 blueberry-crop", () => {
+    const crop = { crop: blueberry, numCrops: 1 };
+    expect(getProfitForCrop(crop)).toBe(25);
   });
 });
