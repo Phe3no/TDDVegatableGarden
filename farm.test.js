@@ -1,3 +1,4 @@
+const { default: test } = require("node:test");
 const {
   getYieldForPlant,
   getYieldForCrop,
@@ -5,6 +6,7 @@ const {
   getCostsForCrop,
   getRevenueForCrop,
   getProfitForCrop,
+  getTotalProfit,
 } = require("./farm");
 
 describe("getYieldForPlant", () => {
@@ -112,5 +114,27 @@ describe("getProfitForCrop", () => {
   test("Get profit for 1 blueberry-crop", () => {
     const crop = { crop: blueberry, numCrops: 1 };
     expect(getProfitForCrop(crop)).toBe(25);
+  });
+});
+
+describe("getTotalProfit", () => {
+  const apple = {
+    name: "apple",
+    yield: 15,
+    cost: 15,
+    salePrice: 3,
+  };
+  const pear = {
+    name: "pear",
+    yield: 18,
+    cost: 20,
+    salePrice: 3.5,
+  };
+  test("", () => {
+    const crops = [
+      { crop: apple, numCrops: 3 },
+      { crop: pear, numCrops: 5 },
+    ];
+    expect(getTotalProfit({ crops })).toBe(305);
   });
 });
