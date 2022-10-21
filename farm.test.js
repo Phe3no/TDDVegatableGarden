@@ -282,6 +282,51 @@ describe("getProfitForCrop", () => {
   });
 });
 
+describe("getProfitForCrop with environment factors", () => {
+  const blueberry = {
+    name: "blueberry",
+    yield: 3,
+    cost: 8,
+    salePrice: 11,
+    factor: {
+      sun: {
+        low: -30,
+        medium: 10,
+        high: 60,
+      },
+      wind: {
+        low: 15,
+        medium: 10,
+        high: 5,
+      },
+    },
+  };
+  test("Get profit for a number of blueberry-crops with environment factors 1", () => {
+    const environmentFactors = {
+      sun: "high",
+      wind: "high",
+    };
+    const crop = { crop: blueberry, numCrops: 3, eFactor: environmentFactors };
+    expect(getProfitForCrop(crop)).toBe(142.32);
+  });
+  test("Get profit for 0 blueberry-crops with environment factors 2", () => {
+    const environmentFactors = {
+      sun: "high",
+      wind: "medium",
+    };
+    const crop = { crop: blueberry, numCrops: 0, eFactor: environmentFactors };
+    expect(getProfitForCrop(crop)).toBe(0);
+  });
+  test("Get profit for 1 blueberry-crop with environment factors 3", () => {
+    const environmentFactors = {
+      sun: "medium",
+      wind: "low",
+    };
+    const crop = { crop: blueberry, numCrops: 1, eFactor: environmentFactors };
+    expect(getProfitForCrop(crop)).toBe(33.8);
+  });
+});
+
 //get total profit
 describe("getTotalProfit", () => {
   const apple = {
