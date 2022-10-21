@@ -19,6 +19,8 @@ describe("getYieldForPlant", () => {
   });
 });
 
+//WARNING the following applies to every test:
+//every interim calculation must be rounded to 2 decimal places
 describe("getYieldForPlant with environment settings", () => {
   const corn = {
     name: "corn",
@@ -368,5 +370,96 @@ describe("getTotalProfit", () => {
       { crop: walnut, numCrops: 1 },
     ];
     expect(getTotalProfit({ crops })).toBe(206);
+  });
+});
+
+describe("getTotalProfit with environment factors", () => {
+  const apple = {
+    name: "apple",
+    yield: 15,
+    cost: 15,
+    salePrice: 3,
+    factor: {
+      sun: {
+        low: -20,
+        medium: 10,
+        high: 30,
+      },
+      wind: {
+        low: 20,
+        medium: 0,
+        high: -25,
+      },
+    },
+  };
+  const pear = {
+    name: "pear",
+    yield: 18,
+    cost: 20,
+    salePrice: 3.5,
+    factor: {
+      sun: {
+        low: -25,
+        medium: 8,
+        high: 40,
+      },
+      wind: {
+        low: 15,
+        medium: 10,
+        high: 5,
+      },
+    },
+  };
+  const walnut = {
+    name: "walnut",
+    yield: 5,
+    cost: 28,
+    salePrice: 9,
+    factor: {
+      sun: {
+        low: -25,
+        medium: 10,
+        high: 50,
+      },
+      wind: {
+        low: 30,
+        medium: 10,
+        high: -70,
+      },
+    },
+  };
+  test("get total profit of 3 crops of apple and 5 crops of pear with environment factors", () => {
+    const environmentFactors = {
+      sun: "high",
+      wind: "high",
+    };
+    const crops = [
+      { crop: apple, numCrops: 3, eFactor: environmentFactors },
+      { crop: pear, numCrops: 5, eFactor: environmentFactors },
+    ];
+    expect(getTotalProfit({ crops })).toBe(449.72);
+  });
+  test("get total profit of 3 crops of apple and 0 crops of pear with environment factors", () => {
+    const environmentFactors = {
+      sun: "low",
+      wind: "medium",
+    };
+    const crops = [
+      { crop: apple, numCrops: 3, eFactor: environmentFactors },
+      { crop: pear, numCrops: 0, eFactor: environmentFactors },
+    ];
+    expect(getTotalProfit({ crops })).toBe(63);
+  });
+  test("get total profit of 2 crops of apple, 3 crops of pear and 1 crop of walnut with environment factors", () => {
+    const environmentFactors = {
+      sun: "medium",
+      wind: "high",
+    };
+    const crops = [
+      { crop: apple, numCrops: 2, eFactor: environmentFactors },
+      { crop: pear, numCrops: 3, eFactor: environmentFactors },
+      { crop: walnut, numCrops: 1, eFactor: environmentFactors },
+    ];
+    expect(getTotalProfit({ crops })).toBe(185.43);
   });
 });

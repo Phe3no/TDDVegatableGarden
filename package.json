@@ -1,0 +1,15 @@
+{
+  "name": "tddvegetablegarden",
+  "version": "1.0.0",
+  "description": "An assignment where we calculate the following, among other things:",
+  "main": "farm.js",
+  "scripts": {
+    "test": "jest --watchAll"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.2.1"
+  }
+}
