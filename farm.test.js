@@ -222,6 +222,44 @@ describe("getRevenueForCrop", () => {
   });
 });
 
+describe("getRevenueForCrop with environment factors", () => {
+  const strawberry = {
+    name: "strawberry",
+    yield: 2,
+    cost: 7,
+    salePrice: 12,
+    factor: {
+      sun: {
+        low: -10,
+        medium: 0,
+        high: 40,
+      },
+      wind: {
+        low: 15,
+        medium: 5,
+        high: -5,
+      },
+    },
+  };
+
+  test("Get revenue for a number of strawberry-crops with environment factors", () => {
+    const environmentFactors = {
+      sun: "high",
+      wind: "high",
+    };
+    const crop = { crop: strawberry, numCrops: 5, eFactor: environmentFactors };
+    expect(getRevenueForCrop(crop)).toBe(159.6);
+  });
+  test("Get revenue for 0 strawberry-crops with environment factors", () => {
+    const environmentFactors = {
+      sun: "high",
+      wind: "high",
+    };
+    const crop = { crop: strawberry, numCrops: 0, eFactor: environmentFactors };
+    expect(getRevenueForCrop(crop)).toBe(0);
+  });
+});
+
 //get profit for crop
 describe("getProfitForCrop", () => {
   const blueberry = {
